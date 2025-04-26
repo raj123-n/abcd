@@ -1,68 +1,41 @@
-# Swasthya - Healthcare Appointment Management System
+# Healthcare Appointment System
 
-Swasthya is a comprehensive healthcare appointment management system designed to connect patients with doctors in rural areas. The platform facilitates appointment booking, management, and tracking for both patients and healthcare providers.
+A modern web application for managing healthcare appointments, built with Next.js, TypeScript, and MongoDB.
 
 ## Features
 
-### For Patients
-- **Appointment Booking**: Schedule appointments with different types of doctors
-- **Appointment Tracking**: View and track the status of appointments
-- **Medical Records**: Access diagnosis, prescriptions, and notes from doctors
-- **Village-based Healthcare**: Connect with healthcare providers in your village
+- Patient appointment booking
+- Doctor management
+- Appointment scheduling
+- Real-time updates
+- User authentication
+- Responsive design
 
-### For Doctors
-- **Appointment Management**: View and manage patient appointments
-- **Patient Records**: Update patient diagnosis, prescriptions, and notes
-- **Status Updates**: Change appointment status (pending, confirmed, completed, cancelled)
-- **Dashboard**: Overview of all appointments with filtering options
+## Tech Stack
 
-## Technology Stack
-
-- **Frontend**: Next.js, React, TypeScript, Tailwind CSS
+- **Frontend**: Next.js, TypeScript, Tailwind CSS
 - **Backend**: Node.js, Express, MongoDB
 - **Authentication**: Firebase Authentication
 - **Database**: MongoDB
-- **UI Components**: Shadcn UI
-
-## Project Structure
-
-```
-swasthya/
-├── frontend/                  # Next.js frontend application
-│   ├── app/                   # Next.js app directory
-│   │   ├── api/               # API routes
-│   │   ├── appointments/      # Patient appointment pages
-│   │   ├── doctor/            # Doctor dashboard pages
-│   │   └── ...
-│   ├── backend/               # Backend models and configuration
-│   │   ├── config/            # Database configuration
-│   │   └── models/            # MongoDB models
-│   ├── components/            # Reusable UI components
-│   └── ...
-├── backend/                   # Express backend application
-│   ├── config/                # Backend configuration
-│   ├── models/                # MongoDB models
-│   ├── routes/                # API routes
-│   └── ...
-└── ...
-```
+- **Styling**: Tailwind CSS, Shadcn UI
 
 ## Getting Started
 
 ### Prerequisites
-- Node.js (v14 or higher)
+
+- Node.js (v14 or later)
 - MongoDB
-- Firebase account (for authentication)
+- Firebase account
 
 ### Installation
 
-1. Clone the repository
+1. Clone the repository:
 ```bash
-git clone https://github.com/yourusername/swasthya.git
-cd swasthya
+git clone https://github.com/yourusername/healthcare-appointment-system.git
+cd healthcare-appointment-system
 ```
 
-2. Install dependencies
+2. Install dependencies:
 ```bash
 # Install frontend dependencies
 cd frontend
@@ -73,75 +46,71 @@ cd ../backend
 npm install
 ```
 
-3. Set up environment variables
-Create a `.env.local` file in the frontend directory with the following variables:
-```
-MONGODB_URI=mongodb://localhost:27017/swasthya
-NEXT_PUBLIC_API_URL=http://localhost:3000
+3. Set up environment variables:
+Create a `.env` file in the frontend directory:
+```env
+NEXT_PUBLIC_FIREBASE_API_KEY=your_firebase_api_key
+NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN=your_firebase_auth_domain
+NEXT_PUBLIC_FIREBASE_PROJECT_ID=your_firebase_project_id
+NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET=your_firebase_storage_bucket
+NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID=your_firebase_messaging_sender_id
+NEXT_PUBLIC_FIREBASE_APP_ID=your_firebase_app_id
 ```
 
-4. Start the development servers
+Create a `.env` file in the backend directory:
+```env
+MONGODB_URI=your_mongodb_uri
+PORT=5000
+```
+
+4. Start the development servers:
 ```bash
-# Start the frontend server
+# Start frontend
 cd frontend
 npm run dev
 
-# Start the backend server (in a separate terminal)
+# Start backend (in a new terminal)
 cd backend
 npm run dev
 ```
 
-5. Access the application
+The application will be available at:
 - Frontend: http://localhost:3000
-- Backend API: http://localhost:5000
+- Backend: http://localhost:5000
 
-## API Endpoints
+## Deployment
 
-### Appointments
-- `GET /api/appointments` - Get all appointments (with optional filters)
-- `POST /api/appointments` - Create a new appointment
-- `GET /api/appointments/:id` - Get a specific appointment
-- `PUT /api/appointments/:id` - Update an appointment
-- `DELETE /api/appointments/:id` - Delete an appointment
+This project can be deployed on Vercel (frontend) and any Node.js hosting service (backend).
 
-## Appointment Data Model
+### Frontend Deployment (Vercel)
 
-```typescript
-interface Appointment {
-  _id: string;
-  patientName: string;
-  patientEmail: string;
-  doctorEmail: string;
-  appointmentDate: string;
-  appointmentTime: string;
-  preferredTime?: string;
-  village?: string;
-  doctorType?: string;
-  symptoms: string;
-  status: 'pending' | 'confirmed' | 'cancelled' | 'completed';
-  diagnosis?: string;
-  prescription?: string;
-  notes?: string;
-  createdAt: string;
-  updatedAt: string;
-}
-```
+1. Push your code to GitHub
+2. Go to [Vercel](https://vercel.com)
+3. Import your repository
+4. Configure environment variables
+5. Deploy
+
+### Backend Deployment
+
+1. Push your code to GitHub
+2. Deploy to your preferred hosting service (e.g., Heroku, DigitalOcean, etc.)
+3. Configure environment variables
+4. Start the server
 
 ## Contributing
 
 1. Fork the repository
-2. Create your feature branch (`git checkout -b feature/amazing-feature`)
-3. Commit your changes (`git commit -m 'Add some amazing feature'`)
-4. Push to the branch (`git push origin feature/amazing-feature`)
+2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the branch (`git push origin feature/AmazingFeature`)
 5. Open a Pull Request
 
 ## License
 
-This project is licensed under the MIT License - see the LICENSE file for details.
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
-## Acknowledgments
+## Contact
 
-- Shadcn UI for the beautiful UI components
-- Next.js team for the amazing framework
-- MongoDB for the database
-- Firebase for authentication 
+Your Name - [@yourtwitter](https://twitter.com/yourtwitter)
+
+Project Link: [https://github.com/yourusername/healthcare-appointment-system](https://github.com/yourusername/healthcare-appointment-system) 
