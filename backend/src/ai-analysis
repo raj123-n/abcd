@@ -1,0 +1,77 @@
+import { Request, Response } from 'express';
+import { SymptomAnalyzer } from './symptomAnalyzer';
+
+export class AnalysisController {
+  private symptomAnalyzer: SymptomAnalyzer;
+
+  constructor() {
+    this.symptomAnalyzer = new SymptomAnalyzer();
+  }
+
+  async analyzeAppointmentSymptoms(req: Request, res: Response) {
+    try {
+      const { symptoms } = req.body;
+
+      if (!symptoms) {
+        return res.status(400).json({
+          error: 'Symptoms are required for analysis'
+        });
+      }
+
+      const analysis = await this.symptomAnalyzer.analyzeSymptoms(symptoms);
+
+      // Enhance the response with appointment-specific recommendations
+      const response = {
+        ...analysis,
+        recommendedDoctorTypes: this.getRecommendedDoctors(analysis.possibleConditions),
+        recommendedTimeSlot: this.getRecommendedTimeSlot(analysis.severity),
+      };
+
+      return res.status(200).json(response);
+    } catch (error) {
+      console.error('Error in symptom analysis:', error);
+      return res.status(500).json({
+        error: 'Failed to analyze symptoms'
+      });
+    }
+  }
+
+  private getRecommendedDoctors(conditions: string[]): string[] {
+    // Map conditions to doctor types based on your medical department structure
+    const doctorMapping: { [key: string]: string[] } = {
+      'respiratory': ['General Medicine', 'Pediatrics'],
+      'vision': ['Ophthalmology'],
+      'dental': ['Dentistry'],
+      'pregnancy': ['Gynecology'],
+      // Add more mappings based on your needs
+    };
+
+    const recommendedDoctors = new Set<string>();
+    
+    conditions.forEach(condition => {
+      Object.entries(doctorMapping).forEach(([category, doctors]) => {
+        if (condition.toLowerCase().includes(category)) {
+          doctors.forEach(doctor => recommendedDoctors.add(doctor));
+        }
+      });
+    });
+
+    return Array.from(recommendedDoctors).length > 0 
+      ? Array.from(recommendedDoctors)
+      : ['General Medicine']; // Default to General Medicine if no specific match
+  }
+
+  private getRecommendedTimeSlot(severity: string): string {
+    // Recommend time slots based on severity
+    switch (severity.toLowerCase()) {
+      case 'high':
+        return 'Morning 9AM-12PM'; // Priority slots for severe cases
+      case 'medium':
+        return 'Afternoon 2PM-5PM';
+      case 'low':
+        return 'Evening 6PM-9PM';
+      default:
+        return 'Afternoon 2PM-5PM';
+    }
+  }
+}

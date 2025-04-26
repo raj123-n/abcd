@@ -1,0 +1,22 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Doctor collection rules
+    match /doctors/{doctorId} {
+      allow create: if request.auth != null;
+      allow read, update: if request.auth != null && request.auth.uid == doctorId;
+    }
+    
+    // Appointment collection rules
+    match /appointments/{appointmentId} {
+      // Doctors can read and update their own appointments
+      allow read, update: if request.auth != null && 
+        resource.data.doctorId == request.auth.uid;
+      
+      // Patients can create appointments and read their own appointments
+      allow create: if request.auth != null;
+      allow read: if request.auth != null && 
+        resource.data.patientId == request.auth.uid;
+    }
+  }
+}

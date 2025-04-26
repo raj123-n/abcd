@@ -1,0 +1,102 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 142 72% 98%;
+    --foreground: 142 30% 10%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 142 30% 10%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 142 30% 10%;
+
+    --primary: 142 76% 36%;
+    --primary-foreground: 144 100% 98%;
+
+    --secondary: 142 20% 92%;
+    --secondary-foreground: 142 30% 10%;
+
+    --muted: 142 20% 92%;
+    --muted-foreground: 142 15% 45%;
+
+    --accent: 142 20% 92%;
+    --accent-foreground: 142 30% 10%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+
+    --border: 142 20% 88%;
+    --input: 142 20% 88%;
+    --ring: 142 76% 36%;
+
+    --radius: 0.5rem;
+  }
+
+  .dark {
+    --background: 142 30% 10%;
+    --foreground: 142 60% 98%;
+
+    --card: 142 30% 10%;
+    --card-foreground: 142 60% 98%;
+
+    --popover: 142 30% 10%;
+    --popover-foreground: 142 60% 98%;
+
+    --primary: 142 76% 36%;
+    --primary-foreground: 144 100% 98%;
+
+    --secondary: 142 30% 15%;
+    --secondary-foreground: 142 60% 98%;
+
+    --muted: 142 30% 15%;
+    --muted-foreground: 142 20% 65%;
+
+    --accent: 142 30% 15%;
+    --accent-foreground: 142 60% 98%;
+
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 142 60% 98%;
+
+    --border: 142 30% 15%;
+    --input: 142 30% 15%;
+    --ring: 142 76% 36%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+@layer components {
+  .medical-container {
+    @apply container mx-auto px-4 py-8;
+  }
+  
+  .form-input {
+    @apply w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2;
+  }
+  
+  .btn-primary {
+    @apply bg-primary text-primary-foreground hover:bg-primary/90 inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 h-10 px-4 py-2;
+  }
+  
+  .card {
+    @apply rounded-lg border bg-card text-card-foreground shadow-sm;
+  }
+  
+  .card-header {
+    @apply flex flex-col space-y-1.5 p-6;
+  }
+  
+  .card-content {
+    @apply p-6 pt-0;
+  }
+}

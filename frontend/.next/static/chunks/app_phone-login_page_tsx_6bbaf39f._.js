@@ -1,0 +1,13 @@
+(globalThis.TURBOPACK = globalThis.TURBOPACK || []).push([
+    "static/chunks/app_phone-login_page_tsx_6bbaf39f._.js",
+    {},
+]);
+(globalThis.TURBOPACK_CHUNK_LISTS = globalThis.TURBOPACK_CHUNK_LISTS || []).push({
+  "path": "static/chunks/app_phone-login_page_tsx_6bbaf39f._.js",
+  "chunks": [
+    "static/chunks/[turbopack]_browser_dev_hmr-client_hmr-client_ts_da154ffc._.js",
+    "static/chunks/node_modules_b78adc84._.js",
+    "static/chunks/_3d3a019d._.js"
+  ],
+  "source": "dynamic"
+});
