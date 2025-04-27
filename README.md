@@ -80,22 +80,68 @@ The application will be available at:
 
 ## Deployment
 
-This project can be deployed on Vercel (frontend) and any Node.js hosting service (backend).
+### Prerequisites for Deployment
+- A GitHub account
+- A Vercel account (for frontend)
+- A MongoDB Atlas account (for database)
+- A Firebase account (for authentication)
 
-### Frontend Deployment (Vercel)
+### Step 1: Prepare Your Repository
+1. Make sure all your code is committed and pushed to GitHub
+2. Ensure your `.gitignore` file is properly configured
+3. Verify that all environment variables are properly documented
 
-1. Push your code to GitHub
-2. Go to [Vercel](https://vercel.com)
-3. Import your repository
-4. Configure environment variables
-5. Deploy
+### Step 2: Set Up GitHub Secrets
+1. Go to your GitHub repository
+2. Navigate to Settings > Secrets and variables > Actions
+3. Add the following secrets:
+   - `NEXT_PUBLIC_FIREBASE_API_KEY`
+   - `NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN`
+   - `NEXT_PUBLIC_FIREBASE_PROJECT_ID`
+   - `NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET`
+   - `NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID`
+   - `NEXT_PUBLIC_FIREBASE_APP_ID`
+   - `MONGODB_URI`
+   - `PORT`
 
-### Backend Deployment
+### Step 3: Deploy Frontend (Vercel)
+1. Go to [Vercel](https://vercel.com)
+2. Click "New Project"
+3. Import your GitHub repository
+4. Configure the following settings:
+   - Framework Preset: Next.js
+   - Root Directory: frontend
+   - Build Command: `npm run build`
+   - Output Directory: .next
+5. Add all environment variables from your `.env` file
+6. Click "Deploy"
 
-1. Push your code to GitHub
-2. Deploy to your preferred hosting service (e.g., Heroku, DigitalOcean, etc.)
-3. Configure environment variables
-4. Start the server
+### Step 4: Deploy Backend
+1. Choose your preferred hosting service (e.g., Heroku, DigitalOcean, Railway)
+2. Connect your GitHub repository
+3. Configure the following:
+   - Build Command: `npm run build`
+   - Start Command: `npm start`
+4. Add all environment variables from your backend `.env` file
+5. Deploy the application
+
+### Step 5: Configure CORS
+1. Update your backend CORS settings to allow requests from your frontend domain
+2. Update your frontend API calls to point to your deployed backend URL
+
+### Step 6: Verify Deployment
+1. Test all major functionality:
+   - User authentication
+   - Appointment booking
+   - Doctor management
+   - Real-time updates
+2. Check for any console errors
+3. Verify that all environment variables are working correctly
+
+### Step 7: Set Up Continuous Deployment
+1. The GitHub Actions workflow (`.github/workflows/deploy.yml`) is already configured
+2. It will automatically run on every push to the main branch
+3. Monitor the Actions tab in your GitHub repository for deployment status
 
 ## Contributing
 
