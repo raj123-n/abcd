@@ -2,31 +2,25 @@ import { NextRequest, NextResponse } from 'next/server';
 import connectDB from '@/backend/config/db';
 import Appointment from '@/backend/models/Appointment';
 
-type RouteContext = {
-  params: {
-    id: string;
-  };
-};
-
 export async function PUT(
   request: NextRequest,
-  context: RouteContext
-) {
+  { params }: { params: { id: string } }
+): Promise<NextResponse> {
   try {
-    console.log(`Updating appointment with ID: ${context.params.id}`);
+    console.log(`Updating appointment with ID: ${params.id}`);
     await connectDB();
     const updates = await request.json();
     
     console.log('Update data:', JSON.stringify(updates, null, 2));
     
     const appointment = await Appointment.findByIdAndUpdate(
-      context.params.id,
+      params.id,
       { $set: updates },
       { new: true }
     ).lean();
     
     if (!appointment) {
-      console.log(`Appointment with ID ${context.params.id} not found`);
+      console.log(`Appointment with ID ${params.id} not found`);
       return NextResponse.json(
         { error: 'Appointment not found' },
         { status: 404 }
@@ -46,12 +40,12 @@ export async function PUT(
 
 export async function GET(
   request: NextRequest,
-  context: RouteContext
-) {
+  { params }: { params: { id: string } }
+): Promise<NextResponse> {
   try {
     await connectDB();
     
-    const appointment = await Appointment.findById(context.params.id).lean();
+    const appointment = await Appointment.findById(params.id).lean();
     
     if (!appointment) {
       return NextResponse.json(
@@ -72,12 +66,12 @@ export async function GET(
 
 export async function DELETE(
   request: NextRequest,
-  context: RouteContext
-) {
+  { params }: { params: { id: string } }
+): Promise<NextResponse> {
   try {
     await connectDB();
     
-    const appointment = await Appointment.findByIdAndDelete(context.params.id);
+    const appointment = await Appointment.findByIdAndDelete(params.id);
     
     if (!appointment) {
       return NextResponse.json(
